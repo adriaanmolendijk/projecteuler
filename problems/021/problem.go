@@ -7,7 +7,6 @@ func main() {
 	for i := 1; i <= 10_000; i++ {
 		divs := sumDivisors(i)
 		if divs != i && sumDivisors(divs) == i {
-			fmt.Println(i)
 			sum += i
 		}
 	}
