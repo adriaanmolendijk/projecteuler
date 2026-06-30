@@ -44,8 +44,11 @@ func main() {
 		}
 	}
 
-	fmt.Println(grid)
-	fmt.Println(path)
+	maxSum := 0
+	for i := 0; i < n; i++ {
+		maxSum = max(maxSum, path[n-1][i])
+	}
+	fmt.Println(maxSum)
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
