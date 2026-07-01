@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	n := 1_000_000
 	maxRatio, maxN := 1.0, 1
-	// jumps of 210 to ensure primefactorization contains 2,3,5,7
+	// jumps of 210 to ensure prime factorization contains 2,3,5,7
 	for i := 210; i <= n; i += 210 {
 		ratio := float64(i) / float64(phi(int64(i)))
 		if ratio > maxRatio {
