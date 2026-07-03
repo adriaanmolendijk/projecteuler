@@ -10,20 +10,10 @@ func main() {
 	// if b = 4 or b = 6, then n^2 + 9 is divisible by 5, so n^2 + 9 is not prime
 	// This leaves b = 0 and therefore n = 10k
 
-	limit, sum := 1_000_000, 0
-	additions := []int{1, 3, 7, 9, 13, 27}
-	for i := 1; i*10 <= limit; i++ {
+	limit, sum := int64(150_000_000), int64(0)
+	for i := int64(1); i*10 < limit; i++ {
 		k := i * 10
-		magicInteger := true
-		for _, add := range additions {
-			m := int64(k)*int64(k) + int64(add)
-			if !isPrime(m) {
-				magicInteger = false
-				break
-			}
-		}
-
-		if magicInteger {
+		if isPrimePattern(k) {
 			sum += k
 			fmt.Println(k)
 		}
@@ -31,14 +21,33 @@ func main() {
 	fmt.Println(sum)
 }
 
-func isPrime(n int64) bool {
+func isPrimePattern(n int64) bool {
 	if n < 2 {
 		return false
 	}
-	for i := int64(2); i*i <= n; i++ {
-		if n%i == 0 {
-			return false
+
+	scorecard := map[int]bool{}
+	for i := 1; i <= 27; i++ {
+		scorecard[i] = true
+	}
+
+	for i := int64(2); i*i <= n*n+27; i++ {
+		for s, _ := range scorecard {
+			m := n*n + int64(s)
+			if m%i == 0 {
+				if s == 1 || s == 3 || s == 7 || s == 9 || s == 13 || s == 27 {
+					return false
+				}
+				delete(scorecard, s)
+			}
 		}
 	}
-	return true
+	delete(scorecard, 1)
+	delete(scorecard, 3)
+	delete(scorecard, 7)
+	delete(scorecard, 9)
+	delete(scorecard, 13)
+	delete(scorecard, 27)
+
+	return len(scorecard) == 0
 }
