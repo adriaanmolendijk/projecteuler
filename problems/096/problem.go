@@ -266,8 +266,9 @@ func checkEntryAlreadyFilled(row, col int, grid [][]int) {
 }
 
 func gridIsFilled(grid [][]int) bool {
-	for i := 1; i <= 9; i++ {
-		for j := 1; j <= 9; j++ {
+	n := len(grid)
+	for i := 1; i <= n; i++ {
+		for j := 1; j <= n; j++ {
 			if grid[i-1][j-1] == 0 {
 				return false
 			}
@@ -289,7 +290,8 @@ func duplicateGrid(grid [][]int) [][]int {
 }
 
 func verifySolution(grid [][]int) bool {
-	for i := 1; i <= 9; i++ {
+	n := len(grid)
+	for i := 1; i <= n; i++ {
 		candidates := getRowCandidates(i, grid)
 		if len(candidates) > 0 {
 			return false
