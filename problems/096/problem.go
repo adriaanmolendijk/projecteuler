@@ -279,9 +279,9 @@ func gridIsFilled(grid [][]int) bool {
 func duplicateGrid(grid [][]int) [][]int {
 	n := len(grid)
 	duplicate := make([][]int, n)
-	for i := 1; i <= 9; i++ {
+	for i := 1; i <= n; i++ {
 		duplicate[i-1] = make([]int, n)
-		for j := 1; j <= 9; j++ {
+		for j := 1; j <= n; j++ {
 			duplicate[i-1][j-1] = grid[i-1][j-1]
 		}
 	}
